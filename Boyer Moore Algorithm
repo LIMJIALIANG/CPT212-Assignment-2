@@ -1,0 +1,103 @@
+def bad_character_heuristic(pattern):
+    """
+    Creates the bad character heuristic table.
+    :param pattern: The pattern for which the bad character heuristic is built.
+    :return: A list representing the bad character heuristic.
+    """
+    bad_char = [-1] * 256  # Initialize all occurrences as -1
+
+    # Update the list with the last occurrence of each character in the pattern
+    for i in range(len(pattern)):
+        bad_char[ord(pattern[i])] = i  # ord() gives the ASCII value of the character
+
+    return bad_char
+
+def good_suffix_heuristic(pattern):
+    """
+    Creates the good suffix heuristic tables: border_suffix and shift_table.
+    :param pattern: The pattern for which the good suffix heuristic is built.
+    :return: Two lists representing the border_suffix and shift_table.
+    """
+    m = len(pattern)
+    border_suffix = [-1] * (m + 1)  # Border suffix table
+    shift_table = [0] * (m + 1)     # Shift table for good suffix
+
+    border_suffix[m] = m + 1  # Base case for the border suffix table
+
+    j = m + 1  # Start position for comparison (beyond the end of the pattern)
+    for i in range(m, 0, -1):
+        while j <= m and pattern[i - 1] != pattern[j - 1]:
+            if shift_table[j] == 0:  # If shift_table[j] is not already set
+                shift_table[j] = j - i  # Set the shift amount
+            j = border_suffix[j]  # Move j to the next border suffix position
+        border_suffix[i - 1] = j  # Set border suffix for the current position
+        j -= 1  # Decrement j to move left in the pattern
+
+    j = border_suffix[0]  # Initialize j for filling the shift table
+    for i in range(m + 1):
+        if shift_table[i] == 0:
+            shift_table[i] = j  # Fill in the shift table where not already set
+        if i == j:
+            j = border_suffix[j]  # Move j to the next border suffix
+
+    return shift_table, border_suffix
+
+def visualize_alignment(text, pattern, s, j):
+    """
+    Visualizes the alignment of the pattern with the text at position s.
+    :param text: The text being searched.
+    :param pattern: The pattern being searched for.
+    :param s: The current shift position.
+    :param j: The current mismatch position.
+    """
+    print("Text   :", text)
+    print("Pattern: " + " " * s + pattern)
+    print("         " + " " * (s + j) + "^")
+    print()
+
+def boyer_moore_search(text, pattern):
+    """
+    Boyer-Moore search algorithm combining bad character and good suffix heuristics.
+    :param text: The text in which to search for the pattern.
+    :param pattern: The pattern to search for.
+    :return: A list of starting indices where the pattern is found in the text.
+    """
+    n = len(text)
+    m = len(pattern)
+   
+    # Preprocess the pattern to create heuristics
+    bad_char = bad_character_heuristic(pattern)
+    shift_table, _ = good_suffix_heuristic(pattern)
+
+    s = 0  # Start with the pattern aligned at the start of the text
+    result = []
+
+    while s <= n - m:
+        j = m - 1  # Start comparison from the end of the pattern
+       
+        # Decrease j while characters of pattern and text match
+        while j >= 0 and pattern[j] == text[s + j]:
+            j -= 1
+       
+        if j < 0:  # Pattern found
+            visualize_alignment(text, pattern, s, 0)
+            print(f"Pattern found at index {s}")
+            result.append(s)
+            s += shift_table[0]  # If pattern is found, shift the pattern based on good suffix
+        else:  # Mismatch found
+            visualize_alignment(text, pattern, s, j)
+            print(f"Mismatch at text index {s + j}, pattern index {j}")
+            print(f"Bad character rule suggests shift by {j - bad_char[ord(text[s + j])]}")
+            print(f"Good suffix rule suggests shift by {shift_table[j + 1]}")
+            # Shift pattern by the maximum value suggested by both heuristics
+            s += max(shift_table[j + 1], j - bad_char[ord(text[s + j])])
+            print(f"Shift pattern to index {s}")
+            print()
+
+    return result
+
+# Example usage:
+text = "WHY WOULD WE WANT TO DO WHAT WE WANT"
+pattern = "WANT"
+result = boyer_moore_search(text, pattern)
+print("Pattern found at indices:", result)
