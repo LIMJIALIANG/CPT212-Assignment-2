@@ -40,38 +40,38 @@ Pattern:              WANT
 
 Pattern found at index 13
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                   WANT
-                              ^
+Pattern:                  WANT
+                             ^
 
-Mismatch at text index 21, pattern index 3
+Mismatch at text index 20, pattern index 3
 Bad character rule suggests shift by 4
 Good suffix rule suggests shift by 1
-Shift pattern to index 22
+Shift pattern to index 21
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                       WANT
-                                  ^
+Pattern:                      WANT
+                                 ^
 
-Mismatch at text index 25, pattern index 3
+Mismatch at text index 24, pattern index 3
+Bad character rule suggests shift by 3
+Good suffix rule suggests shift by 1
+Shift pattern to index 24
+
+Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
+Pattern:                         WANT
+                                   ^
+
+Mismatch at text index 26, pattern index 2
+Bad character rule suggests shift by 1
+Good suffix rule suggests shift by 4
+Shift pattern to index 28
+
+Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
+Pattern:                             WANT
+                                        ^
+
+Mismatch at text index 31, pattern index 3
 Bad character rule suggests shift by 4
-Good suffix rule suggests shift by 1
-Shift pattern to index 26
-
-Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                           WANT
-                                      ^
-
-Mismatch at text index 29, pattern index 3
-Bad character rule suggests shift by 3
-Good suffix rule suggests shift by 1
-Shift pattern to index 29
-
-Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                              WANT
-                                         ^
-
-Mismatch at text index 32, pattern index 3
-Bad character rule suggests shift by 3
 Good suffix rule suggests shift by 1
 Shift pattern to index 32
 
