@@ -12,3 +12,5 @@ The Boyer-Moore algorithm, developed by Robert S. Boyer and J Strother Moore in 
 6. Briefly explain the Knuth-Morris-Pratt (KMP) algorithm (another string-matching algorithm).
 7. Compare and contrast the Boyer-Moore algorithm with the KMP algorithm in terms of their time and space complexity, strengths, and weaknesses.
 8. Discuss scenarios where one algorithm might be preferable over the other.
+
+### *This Git Hub Respository consists of Implementation of Boyer Moore Algorithm and several outputs for different test cases.*
