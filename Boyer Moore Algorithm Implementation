@@ -4,48 +4,51 @@ def bad_character_heuristic(pattern):
     :param pattern: The pattern for which the bad character heuristic is built.
     :return: A list representing the bad character heuristic.
     """
-    bad_char = [-1] * 256  # Initialize all occurrences as -1 (ASCII table size)
+    bad_char = [-1] * 256 # Initialize all occurrences as -1 (ASCII table size)
 
     # Update the list with the last occurrence of each character in the pattern
     for i in range(len(pattern)):
-        bad_char[ord(pattern[i])] = i  # ord() gives the ASCII value of the character
-
+        bad_char[ord(pattern[i])] = i # ord() gives the ASCII value of the character
+        
     return bad_char
 
-def good_suffix_heuristic(pattern):
+def suffix_processing(shift, border_pos, pattern, m):
     """
-    Creates the good suffix heuristic tables: border_suffix and shift_table.
-    :param pattern: The pattern for which the good suffix heuristic is built.
-    :return: Two lists representing the border_suffix and shift_table.
+    Processes the pattern to create the good suffix heuristic tables.
+    :param shift: The shift table to be populated.
+    :param border_pos: The border position table to be populated.
+    :param pattern: The pattern for which the tables are built.
+    :param m: The length of the pattern.
     """
-    m = len(pattern)
-    border_suffix = [-1] * (m + 1)  # Border suffix table
-    shift_table = [0] * (m + 1)     # Shift table for good suffix
-
     i = m
     j = m + 1
-    border_suffix[i] = j  # Initializing the border_suffix table with the pattern length + 1
+    border_pos[i] = j # Initialize the last border position
 
-    # Create border_suffix and shift_table
     while i > 0:
-        # If characters don't match, update shift_table
+        # Process the pattern from right to left
         while j <= m and pattern[i - 1] != pattern[j - 1]:
-            if shift_table[j] == 0:
-                shift_table[j] = j - i
-            j = border_suffix[j]
+            # If characters mismatch, update the shift table
+            if shift[j] == 0:
+                shift[j] = j - i
+            j = border_pos[j] # Update j to the next border position
         i -= 1
         j -= 1
-        border_suffix[i] = j
+        border_pos[i] = j # Update the border position for the current i
 
-    # Use the border_suffix table to fill the shift_table
-    j = border_suffix[0]
+def prefix_processing(shift, border_pos, pattern, m):
+    """
+    Finalizes the good suffix heuristic table by processing prefixes.
+    :param shift: The shift table to be populated.
+    :param border_pos: The border position table to be used.
+    :param pattern: The pattern for which the tables are built.
+    :param m: The length of the pattern.
+    """
+    j = border_pos[0] # Start with the border position of the whole pattern
     for i in range(m + 1):
-        if shift_table[i] == 0:
-            shift_table[i] = j
+        if shift[i] == 0:
+            shift[i] = j # If shift is not set, use the border position
         if i == j:
-            j = border_suffix[j]
-
-    return shift_table, border_suffix
+            j = border_pos[j] # Update j to the next border position
 
 def visualize_alignment(text, pattern, s, j):
     """
@@ -67,46 +70,66 @@ def boyer_moore_search(text, pattern):
     :param pattern: The pattern to search for.
     :return: A list of starting indices where the pattern is found in the text.
     """
-    n = len(text)
-    m = len(pattern)
-   
-    # Preprocess the pattern to create heuristics
+    n = len(text) # Length of the text
+    m = len(pattern) # Length of the pattern
+
+    # Generate the bad character heuristic table
     bad_char = bad_character_heuristic(pattern)
-    shift_table, _ = good_suffix_heuristic(pattern)
+    
+    # Initialize the shift and border position arrays
+    shift = [0] * (m + 1)
+    border_pos = [0] * (m + 1)
 
-    s = 0  # Start with the pattern aligned at the start of the text
-    result = []
+    # Process suffixes and prefixes for good suffix heuristic
+    suffix_processing(shift, border_pos, pattern, m)
+    prefix_processing(shift, border_pos, pattern, m)
 
+    s = 0 # Shift of the pattern with respect to text
+    result = [] # List to store the result indices
+
+    # Main loop to slide the pattern over text
     while s <= n - m:
-        j = m - 1  # Start comparison from the end of the pattern
-       
-        # Decrease j while characters of pattern and text match
+        j = m - 1 # Start comparison from the end of the pattern
+
+        # Move from right to left in the pattern
         while j >= 0 and pattern[j] == text[s + j]:
-            j -= 1
-       
-        if j < 0:  # Pattern found
+            j -= 1 # Decrease j while characters of pattern and text match
+
+        if j < 0: # Pattern found
             visualize_alignment(text, pattern, s, 0)
             print(f"Pattern found at index {s}")
+            # Calculate shifts based on heuristics
+            bad_char_shift = (m - bad_char[ord(text[s + m])] if s + m < n else 1)
+            good_suffix_shift = shift[0]
+            max_shift = max(bad_char_shift, good_suffix_shift)
+
+            # If searching of the pattern has reached the end of the text, then stop
+            if (s + m >= n):
+                print()
+            else:
+                print(f"Bad character rule suggests shift by {bad_char_shift}")
+                print(f"Good suffix rule suggests shift by {good_suffix_shift}")
+                print(f"Shift pattern to index {max_shift}")
             result.append(s)
-            s += shift_table[0]  # If pattern is found, shift the pattern based on good suffix
-        else:  # Mismatch found
+            s += max_shift
+            print()
+        else: # Mismatch found
             visualize_alignment(text, pattern, s, j)
-            # Calculate the shift for the bad character heuristic
             bad_char_shift = max(1, j - bad_char[ord(text[s + j])])
-            # Retrieve the shift from the good suffix heuristic
-            good_suffix_shift = shift_table[j + 1]
+            good_suffix_shift = shift[j + 1]
+            max_shift = max(bad_char_shift, good_suffix_shift)
             print(f"Mismatch at text index {s + j}, pattern index {j}")
             print(f"Bad character rule suggests shift by {bad_char_shift}")
             print(f"Good suffix rule suggests shift by {good_suffix_shift}")
             # Shift pattern by the maximum value suggested by both heuristics
-            s += max(good_suffix_shift, bad_char_shift)
-            print(f"Shift pattern to index {s}")
+            print(f"Shift pattern to index {max_shift}")
+            s += max_shift
             print()
 
     return result
 
-# Example usage:
-text = "WHY WOULD WE WANT TO DO WHAT WE WANT"
-pattern = "WANT"
+# Example Input:
+text = "ABCDAABBEEPYPAABBEE"
+pattern = "AABBEE"
 result = boyer_moore_search(text, pattern)
 print("Pattern found at indices:", result)
