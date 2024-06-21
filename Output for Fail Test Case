@@ -1,0 +1,48 @@
+Enter the text: APPLY THE APPLE APPOINTMENT
+Enter the pattern: APPLES
+Text   : APPLY THE APPLE APPOINTMENT
+Pattern: APPLES
+              ^
+
+Mismatch at text index 5, pattern index 5
+Bad character rule suggests shift by 6
+Good suffix rule suggests shift by 1
+Shift pattern to index 6
+
+Text   : APPLY THE APPLE APPOINTMENT
+Pattern:       APPLES
+                    ^
+
+Mismatch at text index 11, pattern index 5
+Bad character rule suggests shift by 3
+Good suffix rule suggests shift by 1
+Shift pattern to index 3
+
+Text   : APPLY THE APPLE APPOINTMENT
+Pattern:          APPLES
+                       ^
+
+Mismatch at text index 14, pattern index 5
+Bad character rule suggests shift by 1
+Good suffix rule suggests shift by 1
+Shift pattern to index 1
+
+Text   : APPLY THE APPLE APPOINTMENT
+Pattern:           APPLES
+                        ^
+
+Mismatch at text index 15, pattern index 5
+Bad character rule suggests shift by 6
+Good suffix rule suggests shift by 1
+Shift pattern to index 6
+
+Text   : APPLY THE APPLE APPOINTMENT
+Pattern:                 APPLES
+                              ^
+
+Mismatch at text index 21, pattern index 5
+Bad character rule suggests shift by 6
+Good suffix rule suggests shift by 1
+Shift pattern to index 6
+
+Pattern found at indices: []
