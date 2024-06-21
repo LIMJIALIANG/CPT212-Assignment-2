@@ -1,25 +1,118 @@
-Enter the text: ABAAABCD
-Enter the pattern: ABC
-Text   : ABAAABCD
-Pattern: ABC
-           ^
+Enter the text: THIS IS A TEST TEXT TESTING THE TESTER TEST
+Enter the pattern: TEST
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern: TEST
+            ^
 
-Mismatch at text index 2, pattern index 2
+Mismatch at text index 3, pattern index 3
+Bad character rule suggests shift by 1
+Good suffix rule suggests shift by 1
+Shift pattern to index 1
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:  TEST
+             ^
+
+Mismatch at text index 4, pattern index 3
+Bad character rule suggests shift by 4
+Good suffix rule suggests shift by 1
+Shift pattern to index 4
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:      TEST
+                 ^
+
+Mismatch at text index 8, pattern index 3
+Bad character rule suggests shift by 4
+Good suffix rule suggests shift by 1
+Shift pattern to index 4
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:          TEST
+                     ^
+
+Mismatch at text index 12, pattern index 3
+Bad character rule suggests shift by 1
+Good suffix rule suggests shift by 1
+Shift pattern to index 1
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:           TEST
+                   ^
+
+Pattern found at index 10
+Bad character rule suggests shift by 5
+Good suffix rule suggests shift by 3
+Shift pattern to index 5
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                TEST
+                          ^
+
+Mismatch at text index 17, pattern index 2
+Bad character rule suggests shift by 3
+Good suffix rule suggests shift by 3
+Shift pattern to index 3
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                   TEST
+                              ^
+
+Mismatch at text index 21, pattern index 3
 Bad character rule suggests shift by 2
 Good suffix rule suggests shift by 1
 Shift pattern to index 2
 
-Text   : ABAAABCD
-Pattern:   ABC
-             ^
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                     TEST
+                             ^
 
-Mismatch at text index 4, pattern index 2
-Bad character rule suggests shift by 2
+Pattern found at index 20
+Bad character rule suggests shift by 5
+Good suffix rule suggests shift by 3
+Shift pattern to index 5
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                          TEST
+                                    ^
+
+Mismatch at text index 27, pattern index 2
+Bad character rule suggests shift by 3
+Good suffix rule suggests shift by 3
+Shift pattern to index 3
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                             TEST
+                                        ^
+
+Mismatch at text index 31, pattern index 3
+Bad character rule suggests shift by 4
 Good suffix rule suggests shift by 1
-Shift pattern to index 2
+Shift pattern to index 4
 
-Text   : ABAAABCD
-Pattern:     ABC
-             ^
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                                 TEST
+                                         ^
 
-Pattern found at index 4
+Pattern found at index 32
+Bad character rule suggests shift by 3
+Good suffix rule suggests shift by 3
+Shift pattern to index 3
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                                    TEST
+                                               ^
+
+Mismatch at text index 38, pattern index 3
+Bad character rule suggests shift by 4
+Good suffix rule suggests shift by 1
+Shift pattern to index 4
+
+Text   : THIS IS A TEST TEXT TESTING THE TESTER TEST
+Pattern:                                        TEST
+                                                ^
+
+Pattern found at index 39
+
+
+Pattern found at indices: [10, 20, 32, 39]
