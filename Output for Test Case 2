@@ -1,3 +1,5 @@
+Enter the text: WHY WOULD WE WANT TO DO WHAT WE WANT
+Enter the pattern: WANT
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
 Pattern: WANT
             ^
@@ -14,7 +16,7 @@ Pattern:     WANT
 Mismatch at text index 7, pattern index 3
 Bad character rule suggests shift by 4
 Good suffix rule suggests shift by 1
-Shift pattern to index 8
+Shift pattern to index 4
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
 Pattern:         WANT
@@ -23,7 +25,7 @@ Pattern:         WANT
 Mismatch at text index 11, pattern index 3
 Bad character rule suggests shift by 4
 Good suffix rule suggests shift by 1
-Shift pattern to index 12
+Shift pattern to index 4
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
 Pattern:             WANT
@@ -32,52 +34,58 @@ Pattern:             WANT
 Mismatch at text index 15, pattern index 3
 Bad character rule suggests shift by 1
 Good suffix rule suggests shift by 1
-Shift pattern to index 13
+Shift pattern to index 1
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
 Pattern:              WANT
                       ^
 
 Pattern found at index 13
-Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                  WANT
-                             ^
+Bad character rule suggests shift by 5
+Good suffix rule suggests shift by 4
+Shift pattern to index 5
 
-Mismatch at text index 20, pattern index 3
+Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
+Pattern:                   WANT
+                              ^
+
+Mismatch at text index 21, pattern index 3
 Bad character rule suggests shift by 4
 Good suffix rule suggests shift by 1
-Shift pattern to index 21
+Shift pattern to index 4
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                      WANT
-                                 ^
+Pattern:                       WANT
+                                  ^
 
-Mismatch at text index 24, pattern index 3
+Mismatch at text index 25, pattern index 3
+Bad character rule suggests shift by 4
+Good suffix rule suggests shift by 1
+Shift pattern to index 4
+
+Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
+Pattern:                           WANT
+                                      ^
+
+Mismatch at text index 29, pattern index 3
 Bad character rule suggests shift by 3
 Good suffix rule suggests shift by 1
-Shift pattern to index 24
+Shift pattern to index 3
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                         WANT
-                                   ^
+Pattern:                              WANT
+                                         ^
 
-Mismatch at text index 26, pattern index 2
-Bad character rule suggests shift by 1
-Good suffix rule suggests shift by 4
-Shift pattern to index 28
-
-Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
-Pattern:                             WANT
-                                        ^
-
-Mismatch at text index 31, pattern index 3
-Bad character rule suggests shift by 4
+Mismatch at text index 32, pattern index 3
+Bad character rule suggests shift by 3
 Good suffix rule suggests shift by 1
-Shift pattern to index 32
+Shift pattern to index 3
 
 Text   : WHY WOULD WE WANT TO DO WHAT WE WANT
 Pattern:                                 WANT
                                          ^
 
 Pattern found at index 32
+
+
 Pattern found at indices: [13, 32]
